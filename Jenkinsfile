@@ -39,15 +39,9 @@ pipeline {
             }
         }
         stage('Deploy') {
-            environment {
-                TOMCAT_URL = 'http://localhost:8081/' // Replace with your Tomcat URL
-                TOMCAT_CREDENTIALS_ID = 'tomcat-credentials' // ID of Jenkins credentials for Tomcat
-            }
+        
             steps {
-                // Deploy the WAR file to Tomcat
-                withCredentials([usernamePassword(credentialsId: "${TOMCAT_CREDENTIALS_ID}", usernameVariable: 'admin', passwordVariable: 'Upes@123')]) {
-                    sh "curl -u ${TOMCAT_USERNAME}:${TOMCAT_PASSWORD} --upload-file target/*.war ${TOMCAT_URL}/manager/text/deploy?path=/my-webapp"
-                }
+                sh 'mvn install tomcat7:deploy'
             }
         }
     }
