@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - "jenkins_home:/var/jenkins_home"
+    networks:
+      - app_network
+
+  maven:
+    image: maven:latest
+    volumes:
+      - "maven_repository:/root/.m2"
+    networks:
+      - app_network
+
+  tomcat:
+    image: tomcat:9.0
+    ports:
+      - "8081:8080"
+    networks:
+      - app_network
+
+volumes:
+  jenkins_home:
+  maven_repository:
+
+networks:
+  app_network:
