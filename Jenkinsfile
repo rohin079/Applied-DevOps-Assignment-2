@@ -10,11 +10,13 @@ pipeline {
         }
         stage('Code') {
             steps {
-                // Execute code quality checks or static code analysis
+                echo "code stage"
             }
         }
         stage('Review') {
             steps {
+
+                echo "review stage"
                 // Perform manual or automated code review
             }
         }
